@@ -86,7 +86,7 @@ United-Airlines-Data-analysis/
 1. **Data cleaning** — handle missing values, standardize timestamps, filter to United Airlines only, remove/flag cancelled vs. diverted flights.
 2. **Exploratory analysis** — delay distributions by airport, route, day of week, month, and time of day; breakdown of delay minutes by cause.
 3. **SQL layer** — key aggregations (e.g., top 10 worst airports by average delay, monthly trend, cause-by-route breakdown) written as reusable, documented queries.
-4. **Dashboard** ([`dashboard/index.html`](dashboard/index.html)) — an interactive, filterable dashboard (KPIs, worst airports, monthly trend, delay causes, yearly trend, worst routes) so a non-technical stakeholder can explore the same findings visually, filterable by year. Built with plain HTML/JS (Chart.js) instead of Power BI/Tableau so it requires no software install — run `python dashboard/prepare_data.py` once to refresh the numbers, then serve the folder locally (e.g. `python -m http.server` from inside `dashboard/`) and open it in a browser.
+4. **Dashboard** ([`dashboard/index.html`](dashboard/index.html)) — an interactive, filterable dashboard (KPIs, worst airports, monthly trend, delay causes, yearly trend, worst routes) so a non-technical stakeholder can explore the same findings visually, filterable by year. Built with plain HTML/JS (Chart.js) instead of Power BI/Tableau so it requires no software install — run `python dashboard/prepare_data.py` once to refresh the numbers, then just double-click `dashboard/index.html` to open it in a browser (no server needed).
 5. **AI Feature 1 — Delay Risk Predictor**: a Random Forest classification model ([`notebooks/03_delay_prediction_model.py`](notebooks/03_delay_prediction_model.py)) that predicts the probability a flight will be delayed 15+ minutes, using only pre-departure information (origin/destination, month, day of week, scheduled departure hour, distance — deliberately excluding actual delay data to avoid "cheating"). Includes a feature-importance chart so the "why" behind predictions is explainable, not a black box.
 6. **AI Feature 2 — Natural-Language Data Assistant** ([`ai_assistant/query_assistant.py`](ai_assistant/query_assistant.py)): a small tool where a user can type a question in plain English and get a real, computed answer from the dataset — no pandas or SQL knowledge required. It works via lightweight intent-matching (extracting airport codes/months/years from the question, routing to the matching pandas computation) rather than a paid LLM API, so it runs fully offline with zero setup; the script also includes an optional `parse_with_llm()` extension showing how a real LLM could be swapped in as the question router for more flexible free-form phrasing, using the same "LLM never invents numbers — it only picks which function to call" pattern used in production RAG systems.
 
@@ -146,11 +146,9 @@ The dashboard is fully interactive: the year dropdown (top right) filters the ai
 
 **To run it yourself:**
 ```bash
-python dashboard/prepare_data.py        # regenerate dashboard/data.json from the latest cleaned data
-cd dashboard
-python -m http.server 5050              # serve it locally (fetch() requires a server, not a plain file:// open)
-# then open http://127.0.0.1:5050/index.html in a browser
+python dashboard/prepare_data.py        # regenerate dashboard/data.js from the latest cleaned data
 ```
+Then just **double-click `dashboard/index.html`** to open it directly in your browser — no local server required (the data is embedded via a `<script>` tag specifically so this works with a plain file open).
 
 ---
 
@@ -182,8 +180,7 @@ python ai_assistant/chat_app.py
 
 # 7. Build and view the interactive dashboard
 python dashboard/prepare_data.py
-cd dashboard && python -m http.server 5050
-# then open http://127.0.0.1:5050/index.html
+# then just double-click dashboard/index.html to open it in your browser
 ```
 
 ---

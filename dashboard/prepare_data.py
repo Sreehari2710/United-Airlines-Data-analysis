@@ -20,7 +20,8 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_PATH = PROJECT_ROOT / "data" / "processed" / "united_flights.csv"
-OUTPUT_PATH = Path(__file__).resolve().parent / "data.json"
+OUTPUT_JSON_PATH = Path(__file__).resolve().parent / "data.json"
+OUTPUT_JS_PATH = Path(__file__).resolve().parent / "data.js"
 
 DELAY_CAUSE_COLS = [
     "DELAY_DUE_CARRIER",
@@ -141,6 +142,19 @@ dashboard_data["yearly_trend"] = [
     for r in yearly_trend.itertuples()
 ]
 
-OUTPUT_PATH.write_text(json.dumps(dashboard_data, indent=2))
-print(f"Dashboard data saved to {OUTPUT_PATH}")
+json_text = json.dumps(dashboard_data, indent=2)
+
+# Save the plain JSON (handy for inspecting/debugging the numbers directly).
+OUTPUT_JSON_PATH.write_text(json_text)
+
+# Also save it as a small JavaScript file that just assigns the same data
+# to a global variable. index.html loads THIS via a normal <script> tag
+# instead of fetch("data.json") -- browsers block fetch() of local files
+# opened directly (file://) as a security restriction, but a <script src>
+# tag loads fine either way, so this lets the dashboard work by simply
+# double-clicking index.html, with no local server required.
+OUTPUT_JS_PATH.write_text(f"const DASHBOARD_DATA = {json_text};")
+
+print(f"Dashboard data saved to {OUTPUT_JSON_PATH}")
+print(f"Dashboard data (script form) saved to {OUTPUT_JS_PATH}")
 print(f"Years covered: {years}")

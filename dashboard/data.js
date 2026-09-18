@@ -1,0 +1,1322 @@
+const DASHBOARD_DATA = {
+  "years": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "by_selection": {
+    "ALL": {
+      "overview": {
+        "total_flights": 254504,
+        "avg_delay": 5.0,
+        "pct_delayed_15": 19.2,
+        "cancellation_rate": 2.18
+      },
+      "airport_delay": [
+        {
+          "origin": "SRQ",
+          "avg_delay": 16.7,
+          "flights": 454
+        },
+        {
+          "origin": "CLT",
+          "avg_delay": 14.8,
+          "flights": 591
+        },
+        {
+          "origin": "SAV",
+          "avg_delay": 13.1,
+          "flights": 224
+        },
+        {
+          "origin": "ROC",
+          "avg_delay": 13.1,
+          "flights": 276
+        },
+        {
+          "origin": "ANC",
+          "avg_delay": 13.0,
+          "flights": 419
+        },
+        {
+          "origin": "MSO",
+          "avg_delay": 12.9,
+          "flights": 266
+        },
+        {
+          "origin": "BIL",
+          "avg_delay": 11.6,
+          "flights": 326
+        },
+        {
+          "origin": "BTV",
+          "avg_delay": 11.1,
+          "flights": 266
+        },
+        {
+          "origin": "ATL",
+          "avg_delay": 10.6,
+          "flights": 1755
+        },
+        {
+          "origin": "PBI",
+          "avg_delay": 10.5,
+          "flights": 1132
+        },
+        {
+          "origin": "EWR",
+          "avg_delay": 10.4,
+          "flights": 23159
+        },
+        {
+          "origin": "ALB",
+          "avg_delay": 10.3,
+          "flights": 217
+        },
+        {
+          "origin": "MEM",
+          "avg_delay": 10.2,
+          "flights": 268
+        },
+        {
+          "origin": "RSW",
+          "avg_delay": 10.1,
+          "flights": 2151
+        },
+        {
+          "origin": "BNA",
+          "avg_delay": 10.1,
+          "flights": 1390
+        }
+      ],
+      "monthly_delay": [
+        {
+          "month": 1,
+          "avg_delay": 3.2
+        },
+        {
+          "month": 2,
+          "avg_delay": 2.6
+        },
+        {
+          "month": 3,
+          "avg_delay": 2.6
+        },
+        {
+          "month": 4,
+          "avg_delay": 5.0
+        },
+        {
+          "month": 5,
+          "avg_delay": 6.2
+        },
+        {
+          "month": 6,
+          "avg_delay": 13.6
+        },
+        {
+          "month": 7,
+          "avg_delay": 12.7
+        },
+        {
+          "month": 8,
+          "avg_delay": 6.2
+        },
+        {
+          "month": 9,
+          "avg_delay": -0.9
+        },
+        {
+          "month": 10,
+          "avg_delay": -1.0
+        },
+        {
+          "month": 11,
+          "avg_delay": -1.1
+        },
+        {
+          "month": 12,
+          "avg_delay": 8.3
+        }
+      ],
+      "cause_breakdown": [
+        {
+          "cause": "Late Aircraft",
+          "minutes": 1366533,
+          "pct": 40.6
+        },
+        {
+          "cause": "Carrier",
+          "minutes": 1007314,
+          "pct": 30.0
+        },
+        {
+          "cause": "Nas",
+          "minutes": 812830,
+          "pct": 24.2
+        },
+        {
+          "cause": "Weather",
+          "minutes": 176197,
+          "pct": 5.2
+        },
+        {
+          "cause": "Security",
+          "minutes": 318,
+          "pct": 0.0
+        }
+      ],
+      "routes": [
+        {
+          "route": "EWR \u2192 MCI",
+          "avg_delay": 35.8,
+          "flights": 106
+        },
+        {
+          "route": "ORD \u2192 CVG",
+          "avg_delay": 29.2,
+          "flights": 113
+        },
+        {
+          "route": "PDX \u2192 EWR",
+          "avg_delay": 25.7,
+          "flights": 215
+        },
+        {
+          "route": "EWR \u2192 BQN",
+          "avg_delay": 23.1,
+          "flights": 131
+        },
+        {
+          "route": "CLT \u2192 ORD",
+          "avg_delay": 22.8,
+          "flights": 142
+        },
+        {
+          "route": "DEN \u2192 ABQ",
+          "avg_delay": 21.6,
+          "flights": 256
+        },
+        {
+          "route": "MSP \u2192 EWR",
+          "avg_delay": 21.6,
+          "flights": 117
+        },
+        {
+          "route": "ORD \u2192 RIC",
+          "avg_delay": 21.4,
+          "flights": 132
+        },
+        {
+          "route": "EWR \u2192 SMF",
+          "avg_delay": 21.3,
+          "flights": 119
+        },
+        {
+          "route": "SLC \u2192 EWR",
+          "avg_delay": 19.8,
+          "flights": 185
+        }
+      ]
+    },
+    "2019": {
+      "overview": {
+        "total_flights": 63572,
+        "avg_delay": 7.7,
+        "pct_delayed_15": 21.1,
+        "cancellation_rate": 0.84
+      },
+      "airport_delay": [
+        {
+          "origin": "PBI",
+          "avg_delay": 20.5,
+          "flights": 260
+        },
+        {
+          "origin": "BNA",
+          "avg_delay": 18.8,
+          "flights": 331
+        },
+        {
+          "origin": "ATL",
+          "avg_delay": 17.3,
+          "flights": 366
+        },
+        {
+          "origin": "EWR",
+          "avg_delay": 13.8,
+          "flights": 5849
+        },
+        {
+          "origin": "RSW",
+          "avg_delay": 12.2,
+          "flights": 409
+        },
+        {
+          "origin": "PHX",
+          "avg_delay": 11.0,
+          "flights": 729
+        },
+        {
+          "origin": "SJU",
+          "avg_delay": 10.5,
+          "flights": 205
+        },
+        {
+          "origin": "LGA",
+          "avg_delay": 10.4,
+          "flights": 863
+        },
+        {
+          "origin": "FLL",
+          "avg_delay": 10.1,
+          "flights": 692
+        },
+        {
+          "origin": "ORD",
+          "avg_delay": 9.9,
+          "flights": 7821
+        },
+        {
+          "origin": "MIA",
+          "avg_delay": 9.8,
+          "flights": 481
+        },
+        {
+          "origin": "MCO",
+          "avg_delay": 9.0,
+          "flights": 1268
+        },
+        {
+          "origin": "PIT",
+          "avg_delay": 9.0,
+          "flights": 264
+        },
+        {
+          "origin": "DFW",
+          "avg_delay": 8.9,
+          "flights": 634
+        },
+        {
+          "origin": "MSY",
+          "avg_delay": 8.7,
+          "flights": 620
+        }
+      ],
+      "monthly_delay": [
+        {
+          "month": 1,
+          "avg_delay": 7.9
+        },
+        {
+          "month": 2,
+          "avg_delay": 8.3
+        },
+        {
+          "month": 3,
+          "avg_delay": 5.9
+        },
+        {
+          "month": 4,
+          "avg_delay": 6.2
+        },
+        {
+          "month": 5,
+          "avg_delay": 10.9
+        },
+        {
+          "month": 6,
+          "avg_delay": 16.0
+        },
+        {
+          "month": 7,
+          "avg_delay": 13.7
+        },
+        {
+          "month": 8,
+          "avg_delay": 9.9
+        },
+        {
+          "month": 9,
+          "avg_delay": 3.9
+        },
+        {
+          "month": 10,
+          "avg_delay": 2.0
+        },
+        {
+          "month": 11,
+          "avg_delay": 0.3
+        },
+        {
+          "month": 12,
+          "avg_delay": 6.4
+        }
+      ],
+      "cause_breakdown": [
+        {
+          "cause": "Late Aircraft",
+          "minutes": 404499,
+          "pct": 41.3
+        },
+        {
+          "cause": "Nas",
+          "minutes": 307645,
+          "pct": 31.4
+        },
+        {
+          "cause": "Carrier",
+          "minutes": 207661,
+          "pct": 21.2
+        },
+        {
+          "cause": "Weather",
+          "minutes": 60309,
+          "pct": 6.2
+        },
+        {
+          "cause": "Security",
+          "minutes": 78,
+          "pct": 0.0
+        }
+      ],
+      "routes": [
+        {
+          "route": "ATL \u2192 EWR",
+          "avg_delay": 45.1,
+          "flights": 132
+        },
+        {
+          "route": "PHX \u2192 SFO",
+          "avg_delay": 30.6,
+          "flights": 108
+        },
+        {
+          "route": "FLL \u2192 EWR",
+          "avg_delay": 26.5,
+          "flights": 227
+        },
+        {
+          "route": "EWR \u2192 MSY",
+          "avg_delay": 24.9,
+          "flights": 114
+        },
+        {
+          "route": "MCO \u2192 EWR",
+          "avg_delay": 24.0,
+          "flights": 343
+        },
+        {
+          "route": "ORD \u2192 AUS",
+          "avg_delay": 22.1,
+          "flights": 134
+        },
+        {
+          "route": "AUS \u2192 EWR",
+          "avg_delay": 21.5,
+          "flights": 123
+        },
+        {
+          "route": "PBI \u2192 EWR",
+          "avg_delay": 20.9,
+          "flights": 212
+        },
+        {
+          "route": "ORD \u2192 EWR",
+          "avg_delay": 19.5,
+          "flights": 327
+        },
+        {
+          "route": "EWR \u2192 DFW",
+          "avg_delay": 19.1,
+          "flights": 141
+        }
+      ]
+    },
+    "2020": {
+      "overview": {
+        "total_flights": 31584,
+        "avg_delay": -7.2,
+        "pct_delayed_15": 9.8,
+        "cancellation_rate": 7.16
+      },
+      "airport_delay": [
+        {
+          "origin": "MSY",
+          "avg_delay": 1.4,
+          "flights": 266
+        },
+        {
+          "origin": "RSW",
+          "avg_delay": -2.0,
+          "flights": 313
+        },
+        {
+          "origin": "MCO",
+          "avg_delay": -4.5,
+          "flights": 673
+        },
+        {
+          "origin": "DEN",
+          "avg_delay": -4.7,
+          "flights": 4163
+        },
+        {
+          "origin": "DFW",
+          "avg_delay": -4.8,
+          "flights": 281
+        },
+        {
+          "origin": "AUS",
+          "avg_delay": -5.1,
+          "flights": 348
+        },
+        {
+          "origin": "EWR",
+          "avg_delay": -5.1,
+          "flights": 2563
+        },
+        {
+          "origin": "PHX",
+          "avg_delay": -5.2,
+          "flights": 443
+        },
+        {
+          "origin": "ATL",
+          "avg_delay": -5.5,
+          "flights": 206
+        },
+        {
+          "origin": "TPA",
+          "avg_delay": -6.0,
+          "flights": 441
+        },
+        {
+          "origin": "ORD",
+          "avg_delay": -7.0,
+          "flights": 3300
+        },
+        {
+          "origin": "MIA",
+          "avg_delay": -7.6,
+          "flights": 336
+        },
+        {
+          "origin": "IAH",
+          "avg_delay": -8.3,
+          "flights": 2944
+        },
+        {
+          "origin": "IAD",
+          "avg_delay": -8.9,
+          "flights": 1453
+        },
+        {
+          "origin": "SAN",
+          "avg_delay": -9.6,
+          "flights": 491
+        }
+      ],
+      "monthly_delay": [
+        {
+          "month": 1,
+          "avg_delay": -3.5
+        },
+        {
+          "month": 2,
+          "avg_delay": -3.3
+        },
+        {
+          "month": 3,
+          "avg_delay": -7.4
+        },
+        {
+          "month": 4,
+          "avg_delay": -20.5
+        },
+        {
+          "month": 5,
+          "avg_delay": -16.6
+        },
+        {
+          "month": 6,
+          "avg_delay": -11.9
+        },
+        {
+          "month": 7,
+          "avg_delay": -12.9
+        },
+        {
+          "month": 8,
+          "avg_delay": -10.3
+        },
+        {
+          "month": 9,
+          "avg_delay": -10.9
+        },
+        {
+          "month": 10,
+          "avg_delay": -6.8
+        },
+        {
+          "month": 11,
+          "avg_delay": -7.4
+        },
+        {
+          "month": 12,
+          "avg_delay": -4.3
+        }
+      ],
+      "cause_breakdown": [
+        {
+          "cause": "Late Aircraft",
+          "minutes": 62741,
+          "pct": 36.3
+        },
+        {
+          "cause": "Carrier",
+          "minutes": 54709,
+          "pct": 31.7
+        },
+        {
+          "cause": "Nas",
+          "minutes": 46398,
+          "pct": 26.9
+        },
+        {
+          "cause": "Weather",
+          "minutes": 8835,
+          "pct": 5.1
+        },
+        {
+          "cause": "Security",
+          "minutes": 0,
+          "pct": 0.0
+        }
+      ],
+      "routes": [
+        {
+          "route": "MCO \u2192 EWR",
+          "avg_delay": 3.4,
+          "flights": 168
+        },
+        {
+          "route": "ORD \u2192 MCO",
+          "avg_delay": 3.0,
+          "flights": 132
+        },
+        {
+          "route": "EWR \u2192 PBI",
+          "avg_delay": -0.2,
+          "flights": 107
+        },
+        {
+          "route": "SFO \u2192 LAS",
+          "avg_delay": -0.9,
+          "flights": 127
+        },
+        {
+          "route": "ORD \u2192 EWR",
+          "avg_delay": -1.4,
+          "flights": 170
+        },
+        {
+          "route": "DEN \u2192 DFW",
+          "avg_delay": -1.6,
+          "flights": 105
+        },
+        {
+          "route": "LAX \u2192 EWR",
+          "avg_delay": -1.6,
+          "flights": 189
+        },
+        {
+          "route": "DEN \u2192 IAH",
+          "avg_delay": -2.2,
+          "flights": 214
+        },
+        {
+          "route": "EWR \u2192 TPA",
+          "avg_delay": -2.4,
+          "flights": 102
+        },
+        {
+          "route": "PHX \u2192 DEN",
+          "avg_delay": -2.5,
+          "flights": 130
+        }
+      ]
+    },
+    "2021": {
+      "overview": {
+        "total_flights": 45544,
+        "avg_delay": 3.1,
+        "pct_delayed_15": 17.0,
+        "cancellation_rate": 1.3
+      },
+      "airport_delay": [
+        {
+          "origin": "MIA",
+          "avg_delay": 9.6,
+          "flights": 492
+        },
+        {
+          "origin": "MCO",
+          "avg_delay": 7.2,
+          "flights": 1088
+        },
+        {
+          "origin": "DEN",
+          "avg_delay": 7.1,
+          "flights": 6373
+        },
+        {
+          "origin": "RSW",
+          "avg_delay": 6.9,
+          "flights": 537
+        },
+        {
+          "origin": "PBI",
+          "avg_delay": 5.8,
+          "flights": 252
+        },
+        {
+          "origin": "EWR",
+          "avg_delay": 5.6,
+          "flights": 3891
+        },
+        {
+          "origin": "ATL",
+          "avg_delay": 5.5,
+          "flights": 241
+        },
+        {
+          "origin": "IAD",
+          "avg_delay": 5.0,
+          "flights": 2085
+        },
+        {
+          "origin": "IAH",
+          "avg_delay": 4.7,
+          "flights": 4695
+        },
+        {
+          "origin": "SJU",
+          "avg_delay": 3.5,
+          "flights": 282
+        },
+        {
+          "origin": "LAS",
+          "avg_delay": 3.4,
+          "flights": 904
+        },
+        {
+          "origin": "DFW",
+          "avg_delay": 3.1,
+          "flights": 376
+        },
+        {
+          "origin": "ORD",
+          "avg_delay": 2.4,
+          "flights": 4896
+        },
+        {
+          "origin": "LAX",
+          "avg_delay": 2.2,
+          "flights": 1780
+        },
+        {
+          "origin": "TPA",
+          "avg_delay": 2.2,
+          "flights": 710
+        }
+      ],
+      "monthly_delay": [
+        {
+          "month": 1,
+          "avg_delay": -6.1
+        },
+        {
+          "month": 2,
+          "avg_delay": -2.4
+        },
+        {
+          "month": 3,
+          "avg_delay": -5.3
+        },
+        {
+          "month": 4,
+          "avg_delay": -3.2
+        },
+        {
+          "month": 5,
+          "avg_delay": -2.4
+        },
+        {
+          "month": 6,
+          "avg_delay": 10.5
+        },
+        {
+          "month": 7,
+          "avg_delay": 15.2
+        },
+        {
+          "month": 8,
+          "avg_delay": 11.5
+        },
+        {
+          "month": 9,
+          "avg_delay": 0.5
+        },
+        {
+          "month": 10,
+          "avg_delay": -0.7
+        },
+        {
+          "month": 11,
+          "avg_delay": -1.0
+        },
+        {
+          "month": 12,
+          "avg_delay": 8.3
+        }
+      ],
+      "cause_breakdown": [
+        {
+          "cause": "Late Aircraft",
+          "minutes": 186133,
+          "pct": 38.3
+        },
+        {
+          "cause": "Carrier",
+          "minutes": 157468,
+          "pct": 32.4
+        },
+        {
+          "cause": "Nas",
+          "minutes": 110848,
+          "pct": 22.8
+        },
+        {
+          "cause": "Weather",
+          "minutes": 31222,
+          "pct": 6.4
+        },
+        {
+          "cause": "Security",
+          "minutes": 133,
+          "pct": 0.0
+        }
+      ],
+      "routes": [
+        {
+          "route": "EWR \u2192 LAX",
+          "avg_delay": 17.3,
+          "flights": 189
+        },
+        {
+          "route": "IAD \u2192 SFO",
+          "avg_delay": 12.9,
+          "flights": 123
+        },
+        {
+          "route": "DEN \u2192 DFW",
+          "avg_delay": 12.5,
+          "flights": 137
+        },
+        {
+          "route": "MCO \u2192 IAD",
+          "avg_delay": 12.1,
+          "flights": 125
+        },
+        {
+          "route": "MCO \u2192 EWR",
+          "avg_delay": 11.9,
+          "flights": 252
+        },
+        {
+          "route": "RSW \u2192 ORD",
+          "avg_delay": 11.8,
+          "flights": 138
+        },
+        {
+          "route": "SJU \u2192 EWR",
+          "avg_delay": 11.4,
+          "flights": 110
+        },
+        {
+          "route": "MIA \u2192 EWR",
+          "avg_delay": 10.7,
+          "flights": 206
+        },
+        {
+          "route": "DEN \u2192 SAT",
+          "avg_delay": 10.7,
+          "flights": 110
+        },
+        {
+          "route": "MCO \u2192 ORD",
+          "avg_delay": 10.7,
+          "flights": 164
+        }
+      ]
+    },
+    "2022": {
+      "overview": {
+        "total_flights": 64349,
+        "avg_delay": 5.4,
+        "pct_delayed_15": 19.1,
+        "cancellation_rate": 1.9
+      },
+      "airport_delay": [
+        {
+          "origin": "RSW",
+          "avg_delay": 16.3,
+          "flights": 551
+        },
+        {
+          "origin": "MIA",
+          "avg_delay": 15.4,
+          "flights": 550
+        },
+        {
+          "origin": "PBI",
+          "avg_delay": 13.0,
+          "flights": 263
+        },
+        {
+          "origin": "EWR",
+          "avg_delay": 11.9,
+          "flights": 6088
+        },
+        {
+          "origin": "MSP",
+          "avg_delay": 11.7,
+          "flights": 440
+        },
+        {
+          "origin": "DEN",
+          "avg_delay": 11.0,
+          "flights": 8124
+        },
+        {
+          "origin": "SJU",
+          "avg_delay": 10.6,
+          "flights": 253
+        },
+        {
+          "origin": "MCO",
+          "avg_delay": 9.1,
+          "flights": 1278
+        },
+        {
+          "origin": "ATL",
+          "avg_delay": 8.9,
+          "flights": 435
+        },
+        {
+          "origin": "DFW",
+          "avg_delay": 8.7,
+          "flights": 684
+        },
+        {
+          "origin": "MCI",
+          "avg_delay": 8.5,
+          "flights": 248
+        },
+        {
+          "origin": "FLL",
+          "avg_delay": 8.1,
+          "flights": 712
+        },
+        {
+          "origin": "LAS",
+          "avg_delay": 6.6,
+          "flights": 1200
+        },
+        {
+          "origin": "TPA",
+          "avg_delay": 5.5,
+          "flights": 777
+        },
+        {
+          "origin": "IAD",
+          "avg_delay": 5.3,
+          "flights": 3024
+        }
+      ],
+      "monthly_delay": [
+        {
+          "month": 1,
+          "avg_delay": 5.1
+        },
+        {
+          "month": 2,
+          "avg_delay": 2.9
+        },
+        {
+          "month": 3,
+          "avg_delay": 5.3
+        },
+        {
+          "month": 4,
+          "avg_delay": 6.2
+        },
+        {
+          "month": 5,
+          "avg_delay": 9.3
+        },
+        {
+          "month": 6,
+          "avg_delay": 9.5
+        },
+        {
+          "month": 7,
+          "avg_delay": 6.7
+        },
+        {
+          "month": 8,
+          "avg_delay": 7.3
+        },
+        {
+          "month": 9,
+          "avg_delay": -3.3
+        },
+        {
+          "month": 10,
+          "avg_delay": -1.7
+        },
+        {
+          "month": 11,
+          "avg_delay": 0.4
+        },
+        {
+          "month": 12,
+          "avg_delay": 15.8
+        }
+      ],
+      "cause_breakdown": [
+        {
+          "cause": "Late Aircraft",
+          "minutes": 357115,
+          "pct": 41.2
+        },
+        {
+          "cause": "Carrier",
+          "minutes": 299950,
+          "pct": 34.6
+        },
+        {
+          "cause": "Nas",
+          "minutes": 167702,
+          "pct": 19.4
+        },
+        {
+          "cause": "Weather",
+          "minutes": 41543,
+          "pct": 4.8
+        },
+        {
+          "cause": "Security",
+          "minutes": 66,
+          "pct": 0.0
+        }
+      ],
+      "routes": [
+        {
+          "route": "EWR \u2192 BNA",
+          "avg_delay": 30.6,
+          "flights": 103
+        },
+        {
+          "route": "DEN \u2192 DSM",
+          "avg_delay": 25.9,
+          "flights": 100
+        },
+        {
+          "route": "DFW \u2192 EWR",
+          "avg_delay": 24.8,
+          "flights": 137
+        },
+        {
+          "route": "SJU \u2192 EWR",
+          "avg_delay": 24.5,
+          "flights": 103
+        },
+        {
+          "route": "EWR \u2192 MIA",
+          "avg_delay": 23.5,
+          "flights": 243
+        },
+        {
+          "route": "EWR \u2192 SJU",
+          "avg_delay": 20.7,
+          "flights": 111
+        },
+        {
+          "route": "AUS \u2192 DEN",
+          "avg_delay": 18.6,
+          "flights": 164
+        },
+        {
+          "route": "LAS \u2192 EWR",
+          "avg_delay": 18.6,
+          "flights": 193
+        },
+        {
+          "route": "MCO \u2192 IAD",
+          "avg_delay": 17.2,
+          "flights": 148
+        },
+        {
+          "route": "RSW \u2192 EWR",
+          "avg_delay": 17.0,
+          "flights": 199
+        }
+      ]
+    },
+    "2023": {
+      "overview": {
+        "total_flights": 49455,
+        "avg_delay": 10.4,
+        "pct_delayed_15": 24.4,
+        "cancellation_rate": 1.88
+      },
+      "airport_delay": [
+        {
+          "origin": "CLT",
+          "avg_delay": 20.9,
+          "flights": 247
+        },
+        {
+          "origin": "DFW",
+          "avg_delay": 19.0,
+          "flights": 632
+        },
+        {
+          "origin": "EWR",
+          "avg_delay": 16.7,
+          "flights": 4768
+        },
+        {
+          "origin": "JAX",
+          "avg_delay": 16.4,
+          "flights": 207
+        },
+        {
+          "origin": "RDU",
+          "avg_delay": 16.3,
+          "flights": 422
+        },
+        {
+          "origin": "ATL",
+          "avg_delay": 16.2,
+          "flights": 507
+        },
+        {
+          "origin": "DEN",
+          "avg_delay": 15.5,
+          "flights": 6119
+        },
+        {
+          "origin": "FLL",
+          "avg_delay": 14.3,
+          "flights": 560
+        },
+        {
+          "origin": "RSW",
+          "avg_delay": 13.8,
+          "flights": 341
+        },
+        {
+          "origin": "MIA",
+          "avg_delay": 13.8,
+          "flights": 362
+        },
+        {
+          "origin": "IAH",
+          "avg_delay": 12.3,
+          "flights": 4693
+        },
+        {
+          "origin": "PBI",
+          "avg_delay": 12.1,
+          "flights": 210
+        },
+        {
+          "origin": "HNL",
+          "avg_delay": 11.6,
+          "flights": 327
+        },
+        {
+          "origin": "MCO",
+          "avg_delay": 11.1,
+          "flights": 873
+        },
+        {
+          "origin": "MSP",
+          "avg_delay": 11.1,
+          "flights": 351
+        }
+      ],
+      "monthly_delay": [
+        {
+          "month": 1,
+          "avg_delay": 7.7
+        },
+        {
+          "month": 2,
+          "avg_delay": 5.1
+        },
+        {
+          "month": 3,
+          "avg_delay": 7.8
+        },
+        {
+          "month": 4,
+          "avg_delay": 11.1
+        },
+        {
+          "month": 5,
+          "avg_delay": 6.4
+        },
+        {
+          "month": 6,
+          "avg_delay": 20.1
+        },
+        {
+          "month": 7,
+          "avg_delay": 21.4
+        },
+        {
+          "month": 8,
+          "avg_delay": 3.8
+        },
+        {
+          "month": 9,
+          "avg_delay": null
+        },
+        {
+          "month": 10,
+          "avg_delay": null
+        },
+        {
+          "month": 11,
+          "avg_delay": null
+        },
+        {
+          "month": 12,
+          "avg_delay": null
+        }
+      ],
+      "cause_breakdown": [
+        {
+          "cause": "Late Aircraft",
+          "minutes": 356045,
+          "pct": 41.5
+        },
+        {
+          "cause": "Carrier",
+          "minutes": 287526,
+          "pct": 33.5
+        },
+        {
+          "cause": "Nas",
+          "minutes": 180237,
+          "pct": 21.0
+        },
+        {
+          "cause": "Weather",
+          "minutes": 34288,
+          "pct": 4.0
+        },
+        {
+          "cause": "Security",
+          "minutes": 41,
+          "pct": 0.0
+        }
+      ],
+      "routes": [
+        {
+          "route": "IAH \u2192 DFW",
+          "avg_delay": 35.7,
+          "flights": 122
+        },
+        {
+          "route": "RDU \u2192 EWR",
+          "avg_delay": 34.9,
+          "flights": 115
+        },
+        {
+          "route": "EWR \u2192 RSW",
+          "avg_delay": 30.9,
+          "flights": 107
+        },
+        {
+          "route": "EWR \u2192 BNA",
+          "avg_delay": 27.0,
+          "flights": 132
+        },
+        {
+          "route": "EWR \u2192 DFW",
+          "avg_delay": 25.1,
+          "flights": 113
+        },
+        {
+          "route": "EWR \u2192 MCO",
+          "avg_delay": 24.6,
+          "flights": 240
+        },
+        {
+          "route": "FLL \u2192 EWR",
+          "avg_delay": 23.9,
+          "flights": 229
+        },
+        {
+          "route": "DFW \u2192 DEN",
+          "avg_delay": 23.9,
+          "flights": 137
+        },
+        {
+          "route": "EWR \u2192 LAS",
+          "avg_delay": 23.8,
+          "flights": 159
+        },
+        {
+          "route": "EWR \u2192 ATL",
+          "avg_delay": 23.4,
+          "flights": 152
+        }
+      ]
+    }
+  },
+  "yearly_trend": [
+    {
+      "year": 2019,
+      "avg_delay": 7.7,
+      "pct_delayed_15": 21.1
+    },
+    {
+      "year": 2020,
+      "avg_delay": -7.2,
+      "pct_delayed_15": 9.8
+    },
+    {
+      "year": 2021,
+      "avg_delay": 3.1,
+      "pct_delayed_15": 17.0
+    },
+    {
+      "year": 2022,
+      "avg_delay": 5.4,
+      "pct_delayed_15": 19.1
+    },
+    {
+      "year": 2023,
+      "avg_delay": 10.4,
+      "pct_delayed_15": 24.4
+    }
+  ]
+};

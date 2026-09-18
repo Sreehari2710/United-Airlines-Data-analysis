@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <title>United Airlines Delay Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" integrity="sha384-NrKB+u6Ts6AtkIhwPixiKTzgSKNblyhlk0Sohlgar9UHUBzai/sgnNNWWd291xqt" crossorigin="anonymous"></script>
+<!-- Data is loaded via a plain <script> tag (not fetch) so this page also
+     works when opened directly by double-clicking, with no local server. -->
+<script src="data.js"></script>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -141,11 +144,15 @@ let charts = {};
 
 const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-async function loadData() {
-  const res = await fetch('data.json');
-  dashboardData = await res.json();
+function loadData() {
+  if (typeof DASHBOARD_DATA === 'undefined') {
+    document.getElementById('kpiRow').innerHTML =
+      '<div class="kpi-card">Could not find data.js. Run <code>python dashboard/prepare_data.py</code> first.</div>';
+    return;
+  }
+  dashboardData = DASHBOARD_DATA;
   setupYearFilter();
-  render(dashboardData.years.length ? 'ALL' : 'ALL');
+  render('ALL');
 }
 
 function setupYearFilter() {
