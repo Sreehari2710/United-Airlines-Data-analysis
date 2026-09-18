@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>United Airlines Delay Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" integrity="sha384-NrKB+u6Ts6AtkIhwPixiKTzgSKNblyhlk0Sohlgar9UHUBzai/sgnNNWWd291xqt" crossorigin="anonymous"></script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #f2f4f7;
+    color: #1a1a1a;
+  }
+  header {
+    background: #0f2a4a;
+    color: white;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 { font-size: 19px; margin: 0; }
+  header p { font-size: 12.5px; margin: 4px 0 0; color: #b7c4d6; }
+  #yearFilter {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13.5px;
+    background: white;
+    color: #0f2a4a;
+    font-weight: 600;
+  }
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .kpi-card .label {
+    font-size: 12px;
+    color: #667085;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .kpi-card .value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f2a4a;
+    margin-top: 4px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 20px;
+  }
+  .chart-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .chart-card h3 {
+    font-size: 14.5px;
+    margin: 0 0 12px;
+    color: #0f2a4a;
+  }
+  .chart-wrap { position: relative; height: 280px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eef0f3; }
+  th { color: #667085; font-weight: 600; font-size: 11.5px; text-transform: uppercase; }
+  .full-width { grid-column: 1 / -1; }
+  footer {
+    text-align: center;
+    font-size: 11.5px;
+    color: #98a2b3;
+    padding: 24px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>✈️ United Airlines Flight Delay Dashboard</h1>
+    <p>2019–2023 · 254,504 UA flights · Data: U.S. DOT/BTS On-Time Performance</p>
+  </div>
+  <select id="yearFilter"></select>
+</header>
+
+<main>
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <div class="grid">
+    <div class="chart-card">
+      <h3>Worst Origin Airports by Avg. Arrival Delay</h3>
+      <div class="chart-wrap"><canvas id="airportChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Average Arrival Delay by Month</h3>
+      <div class="chart-wrap"><canvas id="monthChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Delay-Minutes by Cause</h3>
+      <div class="chart-wrap"><canvas id="causeChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>% of Flights Delayed 15+ Min, by Year</h3>
+      <div class="chart-wrap"><canvas id="yearChart"></canvas></div>
+    </div>
+    <div class="chart-card full-width">
+      <h3>Worst Routes by Average Arrival Delay</h3>
+      <table id="routeTable">
+        <thead><tr><th>Route</th><th>Avg Delay (min)</th><th>Flights</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Built from the United Airlines Flight Delay &amp; Operational Performance Analysis project · Runs entirely locally, no data leaves this machine
+</footer>
+
+<script>
+let dashboardData = null;
+let charts = {};
+
+const MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+async function loadData() {
+  const res = await fetch('data.json');
+  dashboardData = await res.json();
+  setupYearFilter();
+  render(dashboardData.years.length ? 'ALL' : 'ALL');
+}
+
+function setupYearFilter() {
+  const sel = document.getElementById('yearFilter');
+  const options = ['ALL', ...dashboardData.years];
+  sel.innerHTML = options.map(y => `<option value="${y}">${y === 'ALL' ? 'All Years (2019-2023)' : y}</option>`).join('');
+  sel.addEventListener('change', () => render(sel.value));
+}
+
+function renderKPIs(overview) {
+  const kpis = [
+    { label: 'Total Flights', value: overview.total_flights.toLocaleString() },
+    { label: 'Avg Arrival Delay', value: overview.avg_delay + ' min' },
+    { label: '% Delayed 15+ Min', value: overview.pct_delayed_15 + '%' },
+    { label: 'Cancellation Rate', value: overview.cancellation_rate + '%' },
+  ];
+  document.getElementById('kpiRow').innerHTML = kpis.map(k =>
+    `<div class="kpi-card"><div class="label">${k.label}</div><div class="value">${k.value}</div></div>`
+  ).join('');
+}
+
+function upsertChart(id, config) {
+  if (charts[id]) charts[id].destroy();
+  charts[id] = new Chart(document.getElementById(id).getContext('2d'), config);
+}
+
+function renderAirportChart(data) {
+  upsertChart('airportChart', {
+    type: 'bar',
+    data: {
+      labels: data.map(d => d.origin),
+      datasets: [{
+        label: 'Avg Delay (min)',
+        data: data.map(d => d.avg_delay),
+        backgroundColor: '#c9433f',
+      }],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { title: { display: true, text: 'Minutes' } } },
+    },
+  });
+}
+
+function renderMonthChart(data) {
+  upsertChart('monthChart', {
+    type: 'line',
+    data: {
+      labels: MONTH_NAMES,
+      datasets: [{
+        label: 'Avg Delay (min)',
+        data: data.map(d => d.avg_delay),
+        borderColor: '#0f6fde',
+        backgroundColor: 'rgba(15,111,222,0.15)',
+        fill: true,
+        tension: 0.3,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+    },
+  });
+}
+
+function renderCauseChart(data) {
+  upsertChart('causeChart', {
+    type: 'bar',
+    data: {
+      labels: data.map(d => d.cause),
+      datasets: [{
+        label: 'Delay Minutes',
+        data: data.map(d => d.minutes),
+        backgroundColor: '#1f6f8b',
+      }],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+    },
+  });
+}
+
+function renderYearChart(data) {
+  upsertChart('yearChart', {
+    type: 'line',
+    data: {
+      labels: data.map(d => d.year),
+      datasets: [{
+        label: '% Delayed 15+ min',
+        data: data.map(d => d.pct_delayed_15),
+        borderColor: '#c98a1f',
+        backgroundColor: 'rgba(201,138,31,0.15)',
+        fill: true,
+        tension: 0.3,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+    },
+  });
+}
+
+function renderRouteTable(data) {
+  const tbody = document.querySelector('#routeTable tbody');
+  tbody.innerHTML = data.map(r =>
+    `<tr><td>${r.route}</td><td>${r.avg_delay}</td><td>${r.flights.toLocaleString()}</td></tr>`
+  ).join('');
+}
+
+function render(selectedYear) {
+  const sel = dashboardData.by_selection[selectedYear];
+  renderKPIs(sel.overview);
+  renderAirportChart(sel.airport_delay);
+  renderMonthChart(sel.monthly_delay);
+  renderCauseChart(sel.cause_breakdown);
+  renderYearChart(dashboardData.yearly_trend); // year trend is always full history
+  renderRouteTable(sel.routes);
+}
+
+loadData();
+</script>
+
+</body>
+</html>
