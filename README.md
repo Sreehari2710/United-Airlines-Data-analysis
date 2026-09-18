@@ -82,7 +82,7 @@ United-Airlines-Data-analysis/
 3. **SQL layer** — key aggregations (e.g., top 10 worst airports by average delay, monthly trend, cause-by-route breakdown) written as reusable, documented queries.
 4. **Dashboard** — an interactive Power BI report so a non-technical stakeholder can filter by airport/month/cause and see the story visually.
 5. **AI Feature 1 — Delay Risk Predictor**: a Random Forest classification model ([`notebooks/03_delay_prediction_model.py`](notebooks/03_delay_prediction_model.py)) that predicts the probability a flight will be delayed 15+ minutes, using only pre-departure information (origin/destination, month, day of week, scheduled departure hour, distance — deliberately excluding actual delay data to avoid "cheating"). Includes a feature-importance chart so the "why" behind predictions is explainable, not a black box.
-6. **AI Feature 2 — Natural-Language Data Assistant**: a small script/notebook where a user can type a question like *"What's UA's worst month for delays at ORD?"* and get an answer generated from the actual dataset (via a text-to-SQL or RAG approach over the cleaned data) — demonstrating applied LLM skills on top of traditional analytics.
+6. **AI Feature 2 — Natural-Language Data Assistant** ([`ai_assistant/query_assistant.py`](ai_assistant/query_assistant.py)): a small tool where a user can type a question in plain English and get a real, computed answer from the dataset — no pandas or SQL knowledge required. It works via lightweight intent-matching (extracting airport codes/months/years from the question, routing to the matching pandas computation) rather than a paid LLM API, so it runs fully offline with zero setup; the script also includes an optional `parse_with_llm()` extension showing how a real LLM could be swapped in as the question router for more flexible free-form phrasing, using the same "LLM never invents numbers — it only picks which function to call" pattern used in production RAG systems.
 
 ---
 
@@ -107,6 +107,19 @@ United-Airlines-Data-analysis/
 - Highest cancellation-rate airports: **ORF (4.22%)**, BUF (4.21%), and ROC (4.15%) — notably, ROC also appears in the worst-delay airport list, suggesting a station-level issue worth investigating specifically.
 
 6. **The delay-risk model confirms and quantifies the seasonal/time-of-day pattern.** Using only pre-departure information (no knowledge of the actual delay), a Random Forest classifier reaches an **ROC-AUC of 0.652** (vs. 0.5 for random guessing) — meaningfully predictive, though not highly precise, which is expected given delays also depend on day-of-flight factors (weather, mechanical issues) the model can't see in advance. The two most important predictive features are **scheduled departure hour** (47.6% of the model's decision weight) and **month** (15.7%) — statistically confirming what Findings #1 and #3 showed with simple averages: *when* you fly matters more than almost anything else. → *So what: this validates that schedule-based interventions (avoiding tight evening connections, adding summer buffers) target the right levers — the model independently arrived at the same conclusion as the manual analysis.* ![Feature importance](notebooks/figures/05_feature_importance.png)
+
+**Example conversation with the natural-language assistant** ([`ai_assistant/query_assistant.py`](ai_assistant/query_assistant.py)):
+
+```
+Q: What's the worst airport for delays?
+A: The worst UA origin airport for delays is SRQ, averaging 16.7 minutes of arrival delay across 454 flights.
+
+Q: What's UA's worst month for delays at EWR?
+A: UA's worst month for delays at EWR is July, averaging 25.2 minutes of arrival delay.
+
+Q: What's the cancellation rate at ORF?
+A: UA's cancellation rate at ORF is 4.22%, based on 664 scheduled flights.
+```
 
 ---
 
