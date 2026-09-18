@@ -5,3 +5,5 @@ seaborn
 jupyter
 scikit-learn
 sqlalchemy
+joblib
+flask
